@@ -1,0 +1,98 @@
+<div class="container mt-5">
+
+  <div class="text-center">
+    <h1>Estadisticas sobre vuelos en México</h1>
+  </div>
+
+  <div *ngIf="single.length>0" class="mt-5">
+
+    <div class="row">
+      <div class="col-6 col-xs-12" >
+        <h2 style="width:600px;">Dia con mayor cantidad de movimientos</h2>
+        <ngx-charts-bar-horizontal
+        [view]="view"
+        [results]="single"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+    </ngx-charts-bar-horizontal>
+
+      </div>
+      <div class="col-lg-6 col-xs-12">
+        <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 90px;">
+          El dia con la fecha {{diaOcupado.dia}} es el dia con mayor cantidad de movimientos.
+          Durante este dia ocurrieron el {{(diaOcupado.cantidad/totalDias*100) | number:'1.2-2'}}% de los {{totalDias}} movimientos registrados, dando un total de 6
+          movimientos en el día.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <div class="row">
+      <div class="col-6 col-xs-12"  >
+        <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 120px;">
+          La aerolinea más ocupada es {{aerolineaOcupada.nombre_aerolinea}}, y posee el {{aerolineaOcupada.vuelos/6*100|number:'1.2'}}% de el mercado de los
+          vuelos que se tienen registrados, con un total de {{aerolineaOcupada.vuelos}} vuelos.        </p>
+      </div>
+      <div class="col-6 col-xs-12" *ngIf="vuelosPorAerolinea.length>0" >
+        <h2 style="width:600px;">Aerolinea más ocupada</h2>
+        <ngx-charts-advanced-pie-chart
+        [view]="view2"
+        [results]="vuelosPorAerolinea"
+        [gradient]="gradient"
+        [label]="label"
+        >
+      </ngx-charts-advanced-pie-chart>
+
+      </div>
+    </div>
+  </div>
+  <div class="mt-1">
+    <div class="row">
+      <div class="" >
+        <h2 style="width:600px;">Aerolineas con mas de 2 Vuelos</h2>
+        <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 60px;">
+              En la lista de aerolineas con mas de 2 vuelos registrados se encuentra :
+        </p>
+        <ul *ngIf="aerolineaMas2Vuelos.length>0">
+          <li style="font-size: 24px;" *ngFor="let item of aerolineaMas2Vuelos">{{item.nombre_aerolinea}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <div class="row">
+      <div class="col-6 col-xs-12" >
+        <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 60px;">
+          Existen {{vuelosPorAeropuerto.length}} aeropuertos registrados, de los cuales el aeropuerto {{aeropuertoOcupado.nombre_aeropuerto}},
+          es el que más movimientos registrados tiene ocupando el {{aeropuertoOcupado.movimientos/9*100| number:'1.2-2'}}% de todos los movimientos registrados.
+        </p>
+      </div>
+      <div class="col-6 col-xs-12" *ngIf="vuelosPorAeropuerto.length>0">
+        <h2 style="width:600px;">Aeropuerto más ocupado</h2>
+        <ngx-charts-bar-horizontal
+        [view]="view"
+        [results]="vuelosPorAeropuerto"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel2"
+        [yAxisLabel]="yAxisLabel2">
+    </ngx-charts-bar-horizontal>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>
