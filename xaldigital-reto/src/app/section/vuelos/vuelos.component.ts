@@ -58,7 +58,6 @@ export class VuelosComponent implements OnInit {
   initInfoPorDia(){
     this.vueloService.getDiaMasOcupado().subscribe(data =>{
       this.diaOcupado = data;
-      console.log(data);
     });
     this.vueloService.getVuelosPorDia().subscribe(data => {
       data.forEach(el =>{
@@ -68,18 +67,15 @@ export class VuelosComponent implements OnInit {
         });
         this.totalDias += el.vuelos;
       });
-      console.log(this.totalDias);
     });
   }
 
   initInfoPorAerolinea(){
     this.vueloService.getAerolineasMas2Vuelos().subscribe(data =>{
       this.aerolineaMas2Vuelos = data;
-      console.log(data);
     });
     this.vueloService.getAerolineaMasOcupada().subscribe(data =>{
       this.aerolineaOcupada = data;
-      console.log(data);
     });
     this.vueloService.getVuelosPorAerolinea().subscribe(data => {
       data.forEach(el =>{

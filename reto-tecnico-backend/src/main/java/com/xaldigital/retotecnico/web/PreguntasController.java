@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -40,6 +41,11 @@ public class PreguntasController {
     @GetMapping("/mayor-rep")
     public ResponseEntity<Item> getPreguntaMayorRep() throws IOException {
         return new ResponseEntity<>(preguntasService.getPreguntaMayorRep(), HttpStatus.OK);
+    }
+
+    @GetMapping("/lista-mayor-rep")
+    public ResponseEntity<List<Item>> getPreguntasMayorRep() throws IOException {
+        return new ResponseEntity<>(preguntasService.getPreguntasMayorRep(), HttpStatus.OK);
     }
 
     @GetMapping("/menor-num-vistas")

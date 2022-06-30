@@ -26,15 +26,18 @@ public class PreguntasService {
 
     URL url = new URL("https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=perl&site=stackoverflow");
     HttpURLConnection conn;
+    final Preguntas preguntas;
 
     @Autowired
     public PreguntasService() throws IOException {
+        preguntas = ObtenerPreguntas();
     }
 
     public ContestadasYNoResponse getPreguntasContestadasYNoContestadas() throws IOException {
-        Preguntas preguntas = ObtenerPreguntas();
+
         List<Item> contestadas = new ArrayList<>();
         List<Item> noContestadas = new ArrayList<>();
+        Preguntas preguntas = this.preguntas;
         preguntas.items.forEach(item -> {
             if(item.answer_count > 0){
                 contestadas.add(item);
@@ -46,12 +49,17 @@ public class PreguntasService {
     }
 
     public Item getPreguntaMayorRep() throws IOException {
-        Preguntas preguntas = ObtenerPreguntas();
-        return preguntas.items.stream().max((o1, o2) -> o1.score > o2.score ? 1:-1).get();
+        Preguntas preguntas = this.preguntas;
+        return preguntas.items.stream().max((o1, o2) -> o1.owner.reputation > o2.owner.reputation ? 1:-1).get();
+    }
+
+    public List<Item> getPreguntasMayorRep() throws IOException {
+        Preguntas preguntas = this.preguntas;
+        return preguntas.items.stream().sorted((o1, o2) -> o1.owner.reputation > o2.owner.reputation ? -1:1).collect(Collectors.toList()).subList(0,4);
     }
 
     public Item getPreguntaMenorVistas() throws IOException {
-        Preguntas preguntas = ObtenerPreguntas();
+        Preguntas preguntas = this.preguntas;
         return preguntas.items.stream().max((o1, o2) -> o1.view_count > o2.view_count ? -1:1).get();
     }
 

@@ -1,1 +1,76 @@
-<p>stackoverflow works!</p>
+<div class="container mt-5">
+  <div class="text-center">
+    <h1>Estadisticas sobre StackOverflow</h1>
+  </div>
+
+  <div class="mt-5">
+    <div class="row">
+      <div class="col-6 col-xs-12" *ngIf="contestadasNoContestadas.length>0">
+        <h2 style="width:600px;">Preguntas contestadas y no contestadas</h2>
+          <ngx-charts-bar-horizontal
+            [view]="view"
+            [results]="contestadasNoContestadas"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel">
+          </ngx-charts-bar-horizontal>
+      </div>
+      <div class="col-lg-6 col-xs-12" *ngIf="contestadasNoContestadas.length>0">
+        <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 90px;">
+          De las preguntas de StackOverflow registadas aqui, {{contestadasNoContestadas[0].value}} fueron respondidas y
+          las otras {{contestadasNoContestadas[1].value}} no tuvieron respuesta alguna que fuese registrada.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mt-5">
+    <div class="row">
+      <div class="col-6 col-xs-12" *ngIf="listaMayorRep.length>0">
+        <h2 style="width:600px;">Preguntas hechas por usuarios con alta reputacion</h2>
+          <ngx-charts-bar-horizontal
+            [view]="view"
+            [results]="listaMayorRep"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel2"
+            [yAxisLabel]="yAxisLabel2">
+          </ngx-charts-bar-horizontal>
+      </div>
+      <div class="col-lg-6 col-xs-12" *ngIf="listaMayorRep.length>0&&preguntaMayorRep!=null">
+        <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 0px;">
+            La pregunta registrada con el usuario con más reputación es la que hace el usuario
+            {{preguntaMayorRep.owner.display_name}} con reputacion de {{preguntaMayorRep.owner.reputation}} puntos.
+            Esta es su foto de perfil.
+        </p>
+        <div class="text-center">
+          <a href="{{preguntaMayorRep.owner.link}}">
+            <img src="{{preguntaMayorRep.owner.profile_image}}" style="border-radius: 200px;" alt="">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <div class="row">
+      <div class="col-6 col-xs-12" *ngIf="preguntaMasVieja != null">
+        <h2 style="width:600px;">Pregunta Mas Vieja</h2>
+        <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 0px;">
+         La pregunta mas vieja tiene el titulo de "{{preguntaMasVieja.title}}", como fecha de creacion tiene
+         {{preguntaMasVieja.creation_date | date:'short'}}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
