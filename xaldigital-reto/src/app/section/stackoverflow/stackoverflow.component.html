@@ -53,7 +53,7 @@
         </p>
         <div class="text-center">
           <a href="{{preguntaMayorRep.owner.link}}">
-            <img src="{{preguntaMayorRep.owner.profile_image}}" style="border-radius: 200px;" alt="">
+            <img src="{{preguntaMayorRep.owner.profile_image}}" style="border-radius: 200px;height: 150px;" alt="">
           </a>
         </div>
 
@@ -67,7 +67,15 @@
         <h2 style="width:600px;">Pregunta Mas Vieja</h2>
         <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 0px;">
          La pregunta mas vieja tiene el titulo de "{{preguntaMasVieja.title}}", como fecha de creacion tiene
-         {{preguntaMasVieja.creation_date | date:'short'}}
+         {{preguntaMasVieja.creation_date*1000 | date:'short'}} y fue hecha por el usuario "{{preguntaMasVieja.owner.display_name}}"
+        </p>
+      </div>
+
+      <div class="col-6 col-xs-12" *ngIf="preguntaMasNueva != null">
+        <h2 style="width:600px;">Pregunta Mas Nueva</h2>
+        <p style="font-size: 30px;color: rgb(61, 61, 61);margin-top: 0px;">
+         La pregunta mas nueva tiene el titulo de "{{preguntaMasNueva.title}}", como fecha de creacion tiene
+         {{preguntaMasNueva.creation_date*1000 | date:'short'}} y fue hecha por el usuario "{{preguntaMasNueva.owner.display_name}}"
         </p>
       </div>
 

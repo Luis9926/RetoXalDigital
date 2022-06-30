@@ -73,11 +73,7 @@ export class StackoverflowComponent implements OnInit {
     await this.service.getPreguntaMasVieja().subscribe(data => {
       this.preguntaMasVieja = data.preguntaVieja;
       this.preguntaMasNueva = data.preguntaNueva;
-      var time = new Date(this.preguntaMasVieja.creation_date);
 
-     // this.preguntaMasVieja.creation_date = new Date(this.preguntaMasVieja.creation_date);
-
-      console.log("DATA",this.preguntaMasVieja);
     });
 
   }
